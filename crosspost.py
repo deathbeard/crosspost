@@ -23,8 +23,8 @@ def post_mastodon(text):
 def post_bluesky(title, link):
     s = requests.post("https://bsky.social/xrpc/com.atproto.server.createSession",
         json={"identifier": os.environ["BSKY_HANDLE"], "password": os.environ["BSKY_APP_PASSWORD"]}).json()
-    text = f"{title}\n\n{link}"
-    start = len(f"{title}\n\n".encode())
+    text = f"A blog post: {title}\n\n{link}"
+    start = len(f"A blog post: {title}\n\n".encode())
     record = {
         "$type": "app.bsky.feed.post",
         "text": text,
@@ -40,7 +40,7 @@ def post_bluesky(title, link):
     r.raise_for_status()
 
 for e in new:
-    post_mastodon(f"{e.title}\n\n{e.link}")
+    post_mastodon(f"A blog post: {e.title}\n\n{e.link}")
     post_bluesky(e.title, e.link)
     with open(SEEN_FILE, "a") as f:
         f.write("\n" + e.link)
