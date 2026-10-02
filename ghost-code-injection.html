@@ -43,14 +43,16 @@
     var p = posts && posts[canonical.href];
     if (!p) return;
     var m = p.mastodon, b = p.bluesky;
+    if (!m && !b) return;
+    function none() { return Promise.resolve(null); }
 
     Promise.all([
-      get(MASTO + m.id + "/context"),
-      get(MASTO + m.id + "/favourited_by?limit=80"),
-      get(MASTO + m.id + "/reblogged_by?limit=80"),
-      get(BSKY + "app.bsky.feed.getPostThread?depth=10&uri=" + encodeURIComponent(b.uri)),
-      get(BSKY + "app.bsky.feed.getLikes?limit=100&uri=" + encodeURIComponent(b.uri)),
-      get(BSKY + "app.bsky.feed.getRepostedBy?limit=100&uri=" + encodeURIComponent(b.uri))
+      m ? get(MASTO + m.id + "/context") : none(),
+      m ? get(MASTO + m.id + "/favourited_by?limit=80") : none(),
+      m ? get(MASTO + m.id + "/reblogged_by?limit=80") : none(),
+      b ? get(BSKY + "app.bsky.feed.getPostThread?depth=10&uri=" + encodeURIComponent(b.uri)) : none(),
+      b ? get(BSKY + "app.bsky.feed.getLikes?limit=100&uri=" + encodeURIComponent(b.uri)) : none(),
+      b ? get(BSKY + "app.bsky.feed.getRepostedBy?limit=100&uri=" + encodeURIComponent(b.uri)) : none()
     ]).then(function (r) {
       var faces = [], replies = [];
 
@@ -84,9 +86,9 @@
       var box = el("section", { "class": "xr" });
       box.appendChild(el("h2", null, "Reactions"));
       var invite = el("p", { "class": "xr-invite" }, "Reply or like on ");
-      invite.appendChild(el("a", { href: m.url }, "Mastodon"));
-      invite.appendChild(document.createTextNode(" or "));
-      invite.appendChild(el("a", { href: b.url }, "Bluesky"));
+      if (m) invite.appendChild(el("a", { href: m.url }, "Mastodon"));
+      if (m && b) invite.appendChild(document.createTextNode(" or "));
+      if (b) invite.appendChild(el("a", { href: b.url }, "Bluesky"));
       invite.appendChild(document.createTextNode(" and it'll show up here."));
       box.appendChild(invite);
 

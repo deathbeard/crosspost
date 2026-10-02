@@ -45,11 +45,22 @@ def post_bluesky(title, link):
 
 links = json.load(open(LINKS_FILE)) if os.path.exists(LINKS_FILE) else {}
 
+failed = False
 for e in new:
-    links[e.link] = {"mastodon": post_mastodon(f"A blog post: {e.title}\n\n{e.link}"),
-                     "bluesky": post_bluesky(e.title, e.link)}
+    # Post to each network separately, so one failing doesn't cause a repeat post on the other
+    links[e.link] = {}
+    for name, post in [("mastodon", lambda: post_mastodon(f"A blog post: {e.title}\n\n{e.link}")),
+                       ("bluesky", lambda: post_bluesky(e.title, e.link))]:
+        try:
+            links[e.link][name] = post()
+            print(f"Posted to {name}:", e.title)
+        except Exception as err:
+            failed = True
+            print(f"FAILED posting to {name}:", e.title, "-", err)
     with open(LINKS_FILE, "w") as f:
         json.dump(links, f, indent=2)
     with open(SEEN_FILE, "a") as f:
         f.write("\n" + e.link)
-    print("Posted:", e.title)
+
+if failed:
+    raise SystemExit(1)
