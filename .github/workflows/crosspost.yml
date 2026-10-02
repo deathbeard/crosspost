@@ -25,6 +25,6 @@ jobs:
       - run: |
           git config user.name "crosspost-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add posted.txt
+          git add posted.txt posts.json
           git commit -m "Update posted list" || true
           git push

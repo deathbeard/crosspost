@@ -1,7 +1,8 @@
-import os, datetime, feedparser, requests
+import os, json, datetime, feedparser, requests
 
 FEED = os.environ["FEED_URL"]
 SEEN_FILE = "posted.txt"
+LINKS_FILE = "posts.json"
 
 seen = set(open(SEEN_FILE).read().split()) if os.path.exists(SEEN_FILE) else None
 entries = feedparser.parse(FEED).entries
@@ -19,6 +20,7 @@ def post_mastodon(text):
         headers={"Authorization": f"Bearer {os.environ['MASTODON_TOKEN']}"},
         data={"status": text})
     r.raise_for_status()
+    return {"id": r.json()["id"], "url": r.json()["url"]}
 
 def post_bluesky(title, link):
     s = requests.post("https://bsky.social/xrpc/com.atproto.server.createSession",
@@ -38,10 +40,16 @@ def post_bluesky(title, link):
         headers={"Authorization": f"Bearer {s['accessJwt']}"},
         json={"repo": s["did"], "collection": "app.bsky.feed.post", "record": record})
     r.raise_for_status()
+    uri = r.json()["uri"]
+    return {"uri": uri, "url": f"https://bsky.app/profile/{s['handle']}/post/{uri.split('/')[-1]}"}
+
+links = json.load(open(LINKS_FILE)) if os.path.exists(LINKS_FILE) else {}
 
 for e in new:
-    post_mastodon(f"A blog post: {e.title}\n\n{e.link}")
-    post_bluesky(e.title, e.link)
+    links[e.link] = {"mastodon": post_mastodon(f"A blog post: {e.title}\n\n{e.link}"),
+                     "bluesky": post_bluesky(e.title, e.link)}
+    with open(LINKS_FILE, "w") as f:
+        json.dump(links, f, indent=2)
     with open(SEEN_FILE, "a") as f:
         f.write("\n" + e.link)
     print("Posted:", e.title)
