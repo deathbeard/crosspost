@@ -1,0 +1,125 @@
+<!-- Crosspost reactions: paste into Ghost → Settings → Code injection → Site footer -->
+<style>
+  .xr { margin-top: 4em; padding-top: 2em; border-top: 1px solid rgb(128 128 128 / .3); font-size: .85em; }
+  .xr h2 { font-size: 1.3em; margin: 0 0 .4em; }
+  .xr-invite { margin: 0 0 1.5em; opacity: .8; }
+  .xr-invite a, .xr-meta a { color: var(--ghost-accent-color, currentColor); }
+  .xr-faces { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 .4em; }
+  .xr-faces img { width: 32px; height: 32px; border-radius: 50%; display: block; }
+  .xr-count { margin: 0 0 2em; opacity: .7; }
+  .xr-reply { display: grid; grid-template-columns: 40px 1fr; gap: 12px; margin: 0 0 1.6em; }
+  .xr-reply img { width: 40px; height: 40px; border-radius: 50%; }
+  .xr-meta { opacity: .7; margin-bottom: .2em; }
+  .xr-meta b { opacity: 1; }
+  .xr-text { white-space: pre-line; overflow-wrap: anywhere; }
+</style>
+<script>
+(function () {
+  var DATA = "https://raw.githubusercontent.com/deathbeard/crosspost/main/posts.json";
+  var MASTO = "https://mastodon.social/api/v1/statuses/";
+  var BSKY = "https://public.api.bsky.app/xrpc/";
+
+  if (!document.body.classList.contains("post-template")) return;
+  var canonical = document.querySelector('link[rel="canonical"]');
+  var content = document.querySelector(".gh-content");
+  if (!canonical || !content) return;
+
+  function get(url) {
+    return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+  }
+  function el(tag, attrs, text) {
+    var e = document.createElement(tag);
+    for (var k in attrs || {}) e.setAttribute(k, attrs[k]);
+    if (text) e.textContent = text;
+    return e;
+  }
+  // Mastodon sends HTML; keep only the text, with line breaks
+  function htmlToText(html) {
+    var doc = new DOMParser().parseFromString(html.replace(/<br\s*\/?>/gi, "\n").replace(/<\/p>/gi, "\n\n"), "text/html");
+    return doc.body.textContent.trim().replace(/^(@\S+\s+)+/, "");
+  }
+
+  get(DATA).then(function (posts) {
+    var p = posts && posts[canonical.href];
+    if (!p) return;
+    var m = p.mastodon, b = p.bluesky;
+
+    Promise.all([
+      get(MASTO + m.id + "/context"),
+      get(MASTO + m.id + "/favourited_by?limit=80"),
+      get(MASTO + m.id + "/reblogged_by?limit=80"),
+      get(BSKY + "app.bsky.feed.getPostThread?depth=10&uri=" + encodeURIComponent(b.uri)),
+      get(BSKY + "app.bsky.feed.getLikes?limit=100&uri=" + encodeURIComponent(b.uri)),
+      get(BSKY + "app.bsky.feed.getRepostedBy?limit=100&uri=" + encodeURIComponent(b.uri))
+    ]).then(function (r) {
+      var faces = [], replies = [];
+
+      (r[1] || []).concat(r[2] || []).forEach(function (a) {
+        faces.push({ key: a.url, name: a.display_name || a.username, avatar: a.avatar, url: a.url });
+      });
+      ((r[4] && r[4].likes) || []).map(function (l) { return l.actor; })
+        .concat((r[5] && r[5].repostedBy) || []).forEach(function (a) {
+          var url = "https://bsky.app/profile/" + a.handle;
+          faces.push({ key: url, name: a.displayName || a.handle, avatar: a.avatar, url: url });
+        });
+      var seen = {};
+      faces = faces.filter(function (f) { return f.avatar && !seen[f.key] && (seen[f.key] = true); });
+
+      ((r[0] && r[0].descendants) || []).forEach(function (s) {
+        replies.push({ name: s.account.display_name || s.account.username, handle: "@" + s.account.acct,
+          avatar: s.account.avatar, url: s.url, date: s.created_at, text: htmlToText(s.content), via: "Mastodon" });
+      });
+      (function walk(list) {
+        (list || []).forEach(function (t) {
+          if (!t.post) return;
+          var a = t.post.author;
+          replies.push({ name: a.displayName || a.handle, handle: "@" + a.handle, avatar: a.avatar,
+            url: "https://bsky.app/profile/" + a.handle + "/post/" + t.post.uri.split("/").pop(),
+            date: t.post.record.createdAt, text: t.post.record.text, via: "Bluesky" });
+          walk(t.replies);
+        });
+      })(r[3] && r[3].thread && r[3].thread.replies);
+      replies.sort(function (x, y) { return new Date(x.date) - new Date(y.date); });
+
+      var box = el("section", { "class": "xr" });
+      box.appendChild(el("h2", null, "Reactions"));
+      var invite = el("p", { "class": "xr-invite" }, "Reply or like on ");
+      invite.appendChild(el("a", { href: m.url }, "Mastodon"));
+      invite.appendChild(document.createTextNode(" or "));
+      invite.appendChild(el("a", { href: b.url }, "Bluesky"));
+      invite.appendChild(document.createTextNode(" and it'll show up here."));
+      box.appendChild(invite);
+
+      if (faces.length) {
+        var row = el("div", { "class": "xr-faces" });
+        faces.forEach(function (f) {
+          var a = el("a", { href: f.url, title: f.name });
+          a.appendChild(el("img", { src: f.avatar, alt: f.name, loading: "lazy" }));
+          row.appendChild(a);
+        });
+        box.appendChild(row);
+        box.appendChild(el("p", { "class": "xr-count" }, faces.length + (faces.length === 1 ? " like or repost" : " likes and reposts")));
+      }
+
+      replies.forEach(function (x) {
+        var item = el("div", { "class": "xr-reply" });
+        var pic = el("img", { src: x.avatar || "", alt: "", loading: "lazy" });
+        item.appendChild(pic);
+        var body = el("div");
+        var meta = el("div", { "class": "xr-meta" });
+        meta.appendChild(el("b", null, x.name));
+        meta.appendChild(document.createTextNode(" " + x.handle + " · "));
+        meta.appendChild(el("a", { href: x.url }, new Date(x.date).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }) + " on " + x.via));
+        body.appendChild(meta);
+        body.appendChild(el("div", { "class": "xr-text" }, x.text));
+        item.appendChild(body);
+        box.appendChild(item);
+      });
+
+      var wrap = el("div", { "class": "gh-canvas" });
+      wrap.appendChild(box);
+      content.parentNode.insertBefore(wrap, content.nextSibling);
+    });
+  });
+})();
+</script>
