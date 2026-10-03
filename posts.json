@@ -8,5 +8,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mwvvz65k7r2l",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mwvvz65k7r2l"
     }
+  },
+  "https://www.undermanager.com/the-vegetarian-the-talking-heads-and-wind/": {
+    "mastodon": {
+      "id": "117376795786504499",
+      "url": "https://mastodon.social/@undermanager/117376795786504499"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mwxsmz2wla2m",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mwxsmz2wla2m"
+    }
   }
 }
