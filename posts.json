@@ -18,5 +18,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mwxsmz2wla2m",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mwxsmz2wla2m"
     }
+  },
+  "https://www.undermanager.com/the-pros-and-cons-of-digging-up-kings/": {
+    "mastodon": {
+      "id": "117382020126616476",
+      "url": "https://mastodon.social/@undermanager/117382020126616476"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mx24ur4pgk26",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mx24ur4pgk26"
+    }
   }
 }
