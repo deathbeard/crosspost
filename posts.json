@@ -28,5 +28,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mx24ur4pgk26",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mx24ur4pgk26"
     }
+  },
+  "https://www.undermanager.com/stating-the-obvious-about-stating-the-obvious/": {
+    "mastodon": {
+      "id": "117387512951905420",
+      "url": "https://mastodon.social/@undermanager/117387512951905420"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mx4kwlu6o42s",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mx4kwlu6o42s"
+    }
   }
 }
