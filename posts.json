@@ -38,5 +38,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mx4kwlu6o42s",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mx4kwlu6o42s"
     }
+  },
+  "https://www.undermanager.com/a-beehive-on-the-roof/": {
+    "mastodon": {
+      "id": "117412959989000594",
+      "url": "https://mastodon.social/@undermanager/117412959989000594"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mxhukl26vi2g",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mxhukl26vi2g"
+    }
   }
 }
