@@ -58,5 +58,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mxug3fudrb2u",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mxug3fudrb2u"
     }
+  },
+  "https://www.undermanager.com/music-for-mornings/": {
+    "mastodon": {
+      "id": "117462415213748989",
+      "url": "https://mastodon.social/@undermanager/117462415213748989"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3my5te7duj62x",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3my5te7duj62x"
+    }
   }
 }
