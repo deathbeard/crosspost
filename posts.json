@@ -68,5 +68,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3my5te7duj62x",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3my5te7duj62x"
     }
+  },
+  "https://www.undermanager.com/please-stop-your-dog-from-urinating-on-my-scooter/": {
+    "mastodon": {
+      "id": "117474349059091454",
+      "url": "https://mastodon.social/@undermanager/117474349059091454"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3myd4x3qd3f25",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3myd4x3qd3f25"
+    }
   }
 }
