@@ -98,5 +98,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mzb3wl5tqq2s",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mzb3wl5tqq2s"
     }
+  },
+  "https://www.undermanager.com/how-to-stop-drinking/": {
+    "mastodon": {
+      "id": "117576112092907400",
+      "url": "https://mastodon.social/@undermanager/117576112092907400"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mzqd3kgswa2t",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mzqd3kgswa2t"
+    }
   }
 }
