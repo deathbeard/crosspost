@@ -108,5 +108,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mzqd3kgswa2t",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mzqd3kgswa2t"
     }
+  },
+  "https://www.undermanager.com/how-to-sound-smart-when-talking-about-charts/": {
+    "mastodon": {
+      "id": "117581474737912866",
+      "url": "https://mastodon.social/@undermanager/117581474737912866"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mzspc7eblt24",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mzspc7eblt24"
+    }
   }
 }
