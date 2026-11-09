@@ -118,5 +118,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mzspc7eblt24",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mzspc7eblt24"
     }
+  },
+  "https://www.undermanager.com/breakfast-dis-order/": {
+    "mastodon": {
+      "id": "117587679901780441",
+      "url": "https://mastodon.social/@undermanager/117587679901780441"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3mzvhhypgtr2r",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3mzvhhypgtr2r"
+    }
   }
 }
