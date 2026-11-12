@@ -138,5 +138,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n22aqazpph27",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n22aqazpph27"
     }
+  },
+  "https://www.undermanager.com/post-post-post-digital/": {
+    "mastodon": {
+      "id": "117605234072888856",
+      "url": "https://mastodon.social/@undermanager/117605234072888856"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n25awplbq62n",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n25awplbq62n"
+    }
   }
 }
