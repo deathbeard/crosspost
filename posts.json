@@ -158,5 +158,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n2dubclfdt2m",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n2dubclfdt2m"
     }
+  },
+  "https://www.undermanager.com/fake-time/": {
+    "mastodon": {
+      "id": "117625876421383599",
+      "url": "https://mastodon.social/@undermanager/117625876421383599"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n2ggbr6u2b2i",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n2ggbr6u2b2i"
+    }
   }
 }
