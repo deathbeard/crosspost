@@ -168,5 +168,25 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n2ggbr6u2b2i",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n2ggbr6u2b2i"
     }
+  },
+  "https://www.undermanager.com/obeying-the-rules-of-busking/": {
+    "mastodon": {
+      "id": "117632251830317328",
+      "url": "https://mastodon.social/@undermanager/117632251830317328"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n2jauxf7ax2t",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n2jauxf7ax2t"
+    }
+  },
+  "https://www.undermanager.com/the-magic-in-the-mundane/": {
+    "mastodon": {
+      "id": "117632251883698477",
+      "url": "https://mastodon.social/@undermanager/117632251883698477"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n2jauy5atq2l",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n2jauy5atq2l"
+    }
   }
 }
