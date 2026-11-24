@@ -198,5 +198,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n2y6dflzc42e",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n2y6dflzc42e"
     }
+  },
+  "https://www.undermanager.com/an-early-box-of-matches/": {
+    "mastodon": {
+      "id": "117671061862108996",
+      "url": "https://mastodon.social/@undermanager/117671061862108996"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n32ifpu6xy23",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n32ifpu6xy23"
+    }
   }
 }
