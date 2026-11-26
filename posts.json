@@ -218,5 +218,15 @@
       "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n35ijwatw72m",
       "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n35ijwatw72m"
     }
+  },
+  "https://www.undermanager.com/the-london-review-of-tiktoks-26th-november-2026/": {
+    "mastodon": {
+      "id": "117682052813995269",
+      "url": "https://mastodon.social/@undermanager/117682052813995269"
+    },
+    "bluesky": {
+      "uri": "at://did:plc:omltzurk4a26abnqest2jwdn/app.bsky.feed.post/3n37eltbil22c",
+      "url": "https://bsky.app/profile/undermanager.bsky.social/post/3n37eltbil22c"
+    }
   }
 }
